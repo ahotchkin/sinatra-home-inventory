@@ -1,2 +1,2 @@
-class ItemsController < Sinatra::Base
+class ItemsController < ApplicationController
 end
