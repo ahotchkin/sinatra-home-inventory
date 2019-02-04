@@ -28,4 +28,13 @@ class ItemsController < ApplicationController
     end
   end
 
+  get '/items/:slug' do
+    if logged_in?
+      @item = Item.find_by_slug(params[:slug])
+      erb :'/items/show'
+    else
+      redirect '/login'
+    end
+  end
+
 end
