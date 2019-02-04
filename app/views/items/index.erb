@@ -1,12 +1,16 @@
 <h1>Welcome, <%= current_user.username %>!</h1>
 <h3>Below are all of the items you currently have in your home inventory:</h3>
 
-<% @items.each do |item| %>
-  <%= item.name %>
-<% end %>
-
-<a href="/items/new">Add an item</a>
+<ul>
+  <% @items.each do |item| %>
+    <li><%= item.name %> - $<%= item.cost %></li>
+  <% end %>
+</ul>
 
 <br><br>
+
+<b><a href="/items/new">Add an item</a></b>
+
+<br><br><br>
 
 <a href="/logout">Logout</a>
