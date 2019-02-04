@@ -2,10 +2,9 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if logged_in?
-      erb :'users/new'
+      redirect '/items'
     else
-      redirect '/signup'
-      # does this need to be '/users/signup'?
+      erb :'users/new'
     end
   end
 

@@ -1,0 +1,6 @@
+<h1>Welcome, <%= current_user %>!</h1>
+<h3>Below are all of the items you currently have in your home inventory:</h3>
+
+<% @items.each do |item| %>
+  <%= item.name %>
+<% end %>
