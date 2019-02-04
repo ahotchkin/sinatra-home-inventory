@@ -1,11 +1,13 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    if logged_in?
-      redirect '/items'
-    else
-      erb :'users/new'
-    end
+    # commented out logged_in? if statement because ActiveRecord kept trying to find User with id=4, which didn't exist
+    # if logged_in?
+    #   redirect '/items'
+    # else
+    #   erb :'users/new'
+    # end
+    erb :'users/new'
   end
 
   post '/signup' do
@@ -23,7 +25,7 @@ class UsersController < ApplicationController
     if logged_in?
       redirect '/items'
     else
-      erb :'/login'
+      erb :'/users/login'
     end
   end
 
@@ -40,6 +42,7 @@ class UsersController < ApplicationController
   get '/logout' do
     if logged_in?
       session.clear
+      redirect '/login'
     else
       redirect '/login'
     end
