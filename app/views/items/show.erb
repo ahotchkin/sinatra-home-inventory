@@ -2,4 +2,12 @@
 Cost: $<%= @item.cost %>
 
 <br><br>
+
 <a href="/items/<%= @item.slug %>/edit">Edit Item</a>
+
+<br><br>
+
+<form action="/items/<%= @item.slug %>/delete" method ="POST">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <button type="submit" value="delete">Delete Item</button>
+</form>

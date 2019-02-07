@@ -3,7 +3,7 @@
 
 <ul>
   <% @items.each do |item| %>
-    <li><a href="/items/<%= item.slug %>"><%= item.name %></a> - $<%= item.cost %></li>
+    <li><a href="/items/<%= item.slug %>"><%= item.name %></li>
   <% end %>
 </ul>
 

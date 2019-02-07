@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   get '/items' do
-    @items = Item.all
+    @items = current_user.items
     erb :'/items/index'
   end
 
@@ -53,6 +53,18 @@ class ItemsController < ApplicationController
       redirect "/items/#{@item.slug}"
     # else
     #   redirect '/login'
+    # end
+  end
+
+  delete '/items/:slug/delete' do
+    @item = Item.find_by_slug(params[:slug])
+    @item.delete
+    redirect "/items"
+    # if logged_in? && @item.user == current_user
+    #   @item.delete
+    #   redirect "/items"
+    # else
+    #   redirect "/login"
     # end
   end
 
