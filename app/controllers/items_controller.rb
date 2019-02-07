@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
   get '/items' do
-    @items = current_user.items
+    @items = current_user.items.sort { |a, b| a.name <=> b.name }
     erb :'/items/index'
   end
 
@@ -16,6 +16,8 @@ class ItemsController < ApplicationController
   post '/items' do
     if logged_in? && params[:item][:name] != "" && params[:item][:cost] != ""
       item = Item.create(params[:item])
+      item.user_id = current_user.id
+      item.save
       redirect "/items"
     elsif logged_in? && params[:item][:name] == ""
       # flash message to add a name
@@ -58,14 +60,12 @@ class ItemsController < ApplicationController
 
   delete '/items/:slug/delete' do
     @item = Item.find_by_slug(params[:slug])
-    @item.delete
-    redirect "/items"
-    # if logged_in? && @item.user == current_user
-    #   @item.delete
-    #   redirect "/items"
-    # else
-    #   redirect "/login"
-    # end
+    if logged_in? && @item.user == current_user
+      @item.delete
+      redirect "/items"
+    else
+      redirect "/login"
+    end
   end
 
 end
