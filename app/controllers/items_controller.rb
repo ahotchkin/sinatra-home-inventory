@@ -9,22 +9,22 @@ class ItemsController < ApplicationController
     if logged_in?
       erb :'/items/new'
     else
-      redirect '/login'
+      redirect "/login"
     end
   end
 
   post '/items' do
     if logged_in? && params[:item][:name] != "" && params[:item][:cost] != ""
       item = Item.create(params[:item])
-      redirect '/items'
+      redirect "/items"
     elsif logged_in? && params[:item][:name] == ""
       # flash message to add a name
-      redirect '/items/new'
+      redirect "/items/new"
     elsif logged_in? && params[:item][:cost] == ""
       # flash message to add a cost
-      redirect '/items/new'
+      redirect "/items/new"
     else
-      redirect '/login'
+      redirect "/login"
     end
   end
 
@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
       @item = Item.find_by_slug(params[:slug])
       erb :'/items/show'
     else
-      redirect '/login'
+      redirect "/login"
     end
   end
 
@@ -42,8 +42,18 @@ class ItemsController < ApplicationController
       @item = Item.find_by_slug(params[:slug])
       erb :'/items/edit'
     else
-      redirect '/login'
+      redirect "/login"
     end
+  end
+
+  patch '/items/:slug' do
+    @item = Item.find_by_slug(params[:slug])
+    # if params isn't empty...
+      @item.update(params[:item])
+      redirect "/items/#{@item.slug}"
+    # else
+    #   redirect '/login'
+    # end
   end
 
 end
