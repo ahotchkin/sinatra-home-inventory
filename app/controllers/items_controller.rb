@@ -18,12 +18,13 @@ class ItemsController < ApplicationController
       item = Item.create(params[:item])
       item.user_id = current_user.id
       item.save
+      flash[:message] = "Item successfully added."
       redirect "/items"
     elsif logged_in? && params[:item][:name] == ""
-      # flash message to add a name
+      flash[:message] = "Please enter the item's name."
       redirect "/items/new"
     elsif logged_in? && params[:item][:cost] == ""
-      # flash message to add a cost
+      flash[:message] = "Please enter the item's cost."
       redirect "/items/new"
     else
       redirect "/login"
@@ -50,18 +51,20 @@ class ItemsController < ApplicationController
 
   patch '/items/:slug' do
     @item = Item.find_by_slug(params[:slug])
-    # if params isn't empty...
+    if params[:item] != ""
       @item.update(params[:item])
+      flash[:message] = "Item successfully updated."
       redirect "/items/#{@item.slug}"
-    # else
-    #   redirect '/login'
-    # end
+    else
+      redirect '/login'
+    end
   end
 
   delete '/items/:slug/delete' do
     @item = Item.find_by_slug(params[:slug])
     if logged_in? && @item.user == current_user
       @item.delete
+      flash[:message] = "Item successfully deleted."
       redirect "/items"
     else
       redirect "/login"
