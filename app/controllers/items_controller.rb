@@ -62,7 +62,7 @@ class ItemsController < ApplicationController
 
   delete '/items/:slug/delete' do
     @item = Item.find_by_slug(params[:slug])
-    if logged_in? && @item.user == current_user
+    if logged_in? && @item.user_id == current_user.id
       @item.delete
       flash[:message] = "Item successfully deleted."
       redirect "/items"
