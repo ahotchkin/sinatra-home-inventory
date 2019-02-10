@@ -1,13 +1,11 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    # commented out logged_in? if statement because ActiveRecord kept trying to find User with id=4, which didn't exist
     if logged_in?
       redirect '/items'
     else
       erb :'users/new'
     end
-    # erb :'/users/new'
   end
 
   post '/signup' do
@@ -17,6 +15,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect "/items"
     else
+      flash[:message] = "Please enter a valid username, email, and password to create an account."
       redirect "/signup"
     end
   end
@@ -35,6 +34,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect "/items"
     else
+      flash[:message] = "Incorrect username or password entered."
       redirect "/login"
     end
   end
@@ -42,9 +42,8 @@ class UsersController < ApplicationController
   get '/logout' do
     if logged_in?
       session.clear
-    else
-      redirect "/login"
     end
+    redirect "/login"
   end
 
 end
