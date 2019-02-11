@@ -20,11 +20,8 @@ class ItemsController < ApplicationController
       item.save
       flash[:message] = "Item successfully added."
       redirect "/items"
-    elsif logged_in? && params[:item][:name] == ""
-      flash[:message] = "Please enter the item's name and cost."
-      redirect "/items/new"
-    elsif logged_in? && params[:item][:cost] == ""
-      flash[:message] = "Please enter the item's name and cost."
+    elsif logged_in? && params[:item][:name] == "" || logged_in? && params[:item][:cost] == ""
+      flash[:message] = "Please enter a name and cost for the item."
       redirect "/items/new"
     else
       redirect "/login"
