@@ -59,22 +59,6 @@ class ItemsController < ApplicationController
       flash[:message] = "Please enter a name and cost for the item."
       redirect "/items/#{@item.slug}/edit"
     end
-
-    if logged_in? && params[:item][:name] != "" && params[:item][:cost] != ""
-      item = Item.create(params[:item])
-      item.user_id = current_user.id
-      item.save
-      flash[:message] = "Item successfully added."
-      redirect "/items"
-    elsif logged_in? && params[:item][:name] == ""
-      flash[:message] = "Please enter the item's name and cost."
-      redirect "/items/new"
-    elsif logged_in? && params[:item][:cost] == ""
-      flash[:message] = "Please enter the item's name and cost."
-      redirect "/items/new"
-    else
-      redirect "/login"
-    end
   end
 
   delete '/items/:slug/delete' do
