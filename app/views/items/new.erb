@@ -13,6 +13,18 @@
   <label for="date_purchased">Date Purchased (YYYY-MM-DD):</label>
   <input type="text" id="date_purchased" name="item[date_purchased]">
   <br>
+  <label>Select an existing category:</label>
+  <br>
+
+  <% @categories.each do |category| %>
+    <input type="checkbox" id="<%= category.name %>" name="item[category_ids][]" value="<%= category.id %>"><%= category.name %></input>
+    <br>
+  <% end %>
+
+  <br><br>
+  <!-- should i change naming of category_name to mirror item? -->
+  <label for="category_name">And/or create a new category:</label>
+  <input type="text" id="category_name" name="category_name">
   <button type="submit" value="add_item">Add Item</button>
 </form>
 
