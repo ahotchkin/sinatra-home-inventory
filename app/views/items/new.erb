@@ -4,15 +4,15 @@
 
 <h1>Add an item to your home inventory</h1>
 <form action="/items" method="POST">
-  <label for="name">Item:</label>
-  <input type="text" id="name" name="item[name]">
-  <br>
+  <label for="item_name">Item:</label>
+  <input type="text" id="item_name" name="item_name">
+  <br><br>
   <label for="cost">Cost: $</label>
-  <input type="text" id="cost" name="item[cost]">
-  <br>
+  <input type="text" id="cost" name="cost">
+  <br><br>
   <label for="date_purchased">Date Purchased (YYYY-MM-DD):</label>
-  <input type="text" id="date_purchased" name="item[date_purchased]">
-  <br>
+  <input type="text" id="date_purchased" name="date_purchased">
+  <br><br>
   <label>Select an existing category:</label>
   <br>
 
@@ -21,8 +21,8 @@
     <br>
   <% end %>
 
-  <br><br>
-  <!-- should i change naming of category_name to mirror item? -->
+  <br>
+
   <label for="category_name">And/or create a new category:</label>
   <input type="text" id="category_name" name="category_name">
   <button type="submit" value="add_item">Add Item</button>

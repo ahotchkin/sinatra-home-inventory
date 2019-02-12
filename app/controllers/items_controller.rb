@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
 
   get '/items/new' do
     if logged_in?
-      @categories = current_user.categories.sort { |a, b| a.name <=> b.name }
+      @categories =  Category.all.sort { |a, b| a.name <=> b.name }
       erb :'/items/new'
     else
       redirect "/login"
@@ -16,8 +16,12 @@ class ItemsController < ApplicationController
 
   post '/items' do
     if logged_in? && params[:item][:name] != "" && params[:item][:cost] != ""
-      item = Item.create(params[:item])
+      item = Item.create(name: params[:item_name], cost: params[:item][:cost], date_purchased: params[:item][:date_purchased])
       item.user_id = current_user.id
+      item.category_ids = params[:item][:category_ids]
+      if !params[:category_name].empty?
+        item.categories << Category.create(name: params[:category_name])
+      end
       item.save
       flash[:message] = "Item successfully added."
       redirect "/items"
