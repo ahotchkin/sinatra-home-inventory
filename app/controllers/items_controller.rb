@@ -15,8 +15,8 @@ class ItemsController < ApplicationController
   end
 
   post '/items' do
-    if logged_in? && params[:item][:name] != "" && params[:item][:cost] != ""
-      item = Item.create(name: params[:item_name], cost: params[:item][:cost], date_purchased: params[:item][:date_purchased])
+    if logged_in? && params[:item_name] != "" && params[:cost] != ""
+      item = Item.create(name: params[:item_name], cost: params[:cost], date_purchased: params[:date_purchased])
       item.user_id = current_user.id
       item.category_ids = params[:item][:category_ids]
       if !params[:category_name].empty?
@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
       item.save
       flash[:message] = "Item successfully added."
       redirect "/items"
-    elsif logged_in? && params[:item][:name] == "" || logged_in? && params[:item][:cost] == ""
+    elsif logged_in? && params[:item_name] == "" || logged_in? && params[:cost] == ""
       flash[:message] = "Please enter a name and cost for the item."
       redirect "/items/new"
     else

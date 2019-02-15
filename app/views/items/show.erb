@@ -9,7 +9,7 @@ Date Purchased: <%= @item.date_purchased %>
 <br><br>
 Stored in:
 <ul>
-  <% @item.categories.all do |category| %>
+  <% @item.categories.each do |category| %>
     <li><%= category.name %></li>
   <% end %>
 </ul>
