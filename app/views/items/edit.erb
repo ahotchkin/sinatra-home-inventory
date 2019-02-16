@@ -1,6 +1,8 @@
-<h3 style="color: #16A085;"><% if flash.has?(:message) %>
-  <%= flash[:message] %>
-<% end %></h3>
+<h3 style="color: #16A085;">
+  <% if flash.has?(:message) %>
+    <%= flash[:message] %>
+  <% end %>
+</h3>
 
 <h1>Edit <%= @item.name %> below:</h1>
 

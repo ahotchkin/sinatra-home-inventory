@@ -1,6 +1,8 @@
-<h3 style="color: #16A085;"><% if flash.has?(:message) %>
-  <%= flash[:message] %>
-<% end %></h3>
+<h3 style="color: #16A085;">
+  <% if flash.has?(:message) %>
+    <%= flash[:message] %>
+  <% end %>
+</h3>
 
 <h1>Add an item to your home inventory</h1>
 <form action="/items" method="POST">

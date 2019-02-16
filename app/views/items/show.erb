@@ -1,6 +1,8 @@
-<h3 style="color: #16A085;"><% if flash.has?(:message) %>
-  <%= flash[:message] %>
-<% end %></h3>
+<h3 style="color: #16A085;">
+  <% if flash.has?(:message) %>
+    <%= flash[:message] %>
+  <% end %>
+</h3>
 
 <h2><%= @item.name %></h2>
 Cost: $<%= @item.cost %>
@@ -8,11 +10,15 @@ Cost: $<%= @item.cost %>
 Date Purchased: <%= @item.date_purchased %>
 <br><br>
 Stored in:
-<ul>
-  <% @item.categories.each do |category| %>
-    <li><%= category.name %></li>
+  <% if !@item.categories.empty? %>
+  <ul>
+    <% @item.categories.each do |category| %>
+      <li><%= category.name %></li>
+    <% end %>
+  <% else %>
+    <%= @item.name %> is not assigned to any categories.
   <% end %>
-</ul>
+  </ul>
 <br><br>
 
 <a href="/items/<%= @item.slug %>/edit">Edit Item</a>

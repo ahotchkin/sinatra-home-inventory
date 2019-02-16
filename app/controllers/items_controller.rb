@@ -15,8 +15,8 @@ class ItemsController < ApplicationController
   end
 
   post '/items' do
-    if logged_in? && params[:item_name] != "" && params[:cost] != ""
-      item = Item.create(name: params[:item_name], cost: params[:cost], date_purchased: params[:date_purchased])
+    if logged_in? && !params[:item_name].empty? && !params[:cost].empty?
+      item = Item.new(name: params[:item_name], cost: params[:cost], date_purchased: params[:date_purchased])
       item.user_id = current_user.id
       item.category_ids = params[:item][:category_ids]
       if !params[:category_name].empty?
@@ -25,8 +25,8 @@ class ItemsController < ApplicationController
       item.save
       flash[:message] = "Item successfully added."
       redirect "/items"
-    elsif logged_in? && params[:item_name] == "" || logged_in? && params[:cost] == ""
-      flash[:message] = "Please enter a name and cost for the item."
+    elsif logged_in? && params[:item_name].empty? || logged_in? && params[:cost].empty?
+      flash[:message] = "Please enter a name and cost for the item, and assign at least one category."
       redirect "/items/new"
     else
       redirect "/login"
@@ -54,7 +54,7 @@ class ItemsController < ApplicationController
 
   patch '/items/:slug' do
     item = Item.find_by_slug(params[:slug])
-    if params[:item_name] != "" && params[:cost] != ""
+    if !params[:item_name].empty? && !params[:cost].empty?
       item.update(name: params[:item_name], cost: params[:cost], date_purchased: params[:date_purchased])
       item.category_ids = params[:item][:category_ids]
       if !params[:category_name].empty?
@@ -63,8 +63,8 @@ class ItemsController < ApplicationController
       item.save
       flash[:message] = "Item successfully updated."
       redirect "/items/#{item.slug}"
-    elsif params[:item_name] == "" || params[:cost] == ""
-      flash[:message] = "Please enter a name and cost for the item."
+    elsif params[:item_name].empty? || params[:cost].empty?
+      flash[:message] = "Please enter a name and cost for the item, and assign at least one category."
       redirect "/items/#{item.slug}/edit"
     end
   end
