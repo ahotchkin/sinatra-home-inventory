@@ -53,19 +53,19 @@ class ItemsController < ApplicationController
   end
 
   patch '/items/:slug' do
-    @item = Item.find_by_slug(params[:slug])
+    item = Item.find_by_slug(params[:slug])
     if params[:item_name] != "" && params[:cost] != ""
-      @item.update(name: params[:item_name], cost: params[:cost], date_purchased: params[:date_purchased])
+      item.update(name: params[:item_name], cost: params[:cost], date_purchased: params[:date_purchased])
       item.category_ids = params[:item][:category_ids]
       if !params[:category_name].empty?
         item.categories << Category.create(name: params[:category_name])
       end
       item.save
       flash[:message] = "Item successfully updated."
-      redirect "/items/#{@item.slug}"
+      redirect "/items/#{item.slug}"
     elsif params[:item_name] == "" || params[:cost] == ""
       flash[:message] = "Please enter a name and cost for the item."
-      redirect "/items/#{@item.slug}/edit"
+      redirect "/items/#{item.slug}/edit"
     end
   end
 
