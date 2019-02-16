@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
       flash[:message] = "Item successfully added."
       redirect "/items"
     elsif logged_in? && params[:item_name].empty? || logged_in? && params[:cost].empty?
-      flash[:message] = "Please enter a name and cost for the item, and assign at least one category."
+      flash[:message] = "Please enter a name and cost for the item."
       redirect "/items/new"
     else
       redirect "/login"
@@ -64,7 +64,7 @@ class ItemsController < ApplicationController
       flash[:message] = "Item successfully updated."
       redirect "/items/#{item.slug}"
     elsif params[:item_name].empty? || params[:cost].empty?
-      flash[:message] = "Please enter a name and cost for the item, and assign at least one category."
+      flash[:message] = "Please enter a name and cost for the item."
       redirect "/items/#{item.slug}/edit"
     end
   end
