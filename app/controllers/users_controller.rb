@@ -10,13 +10,19 @@ class UsersController < ApplicationController
 
   post '/signup' do
     # add functionality to prevent a user from creating a username that already exists
-    user = User.new(username: params[:username], email: params[:email], password: params[:password])
-    if user.save
-      session[:user_id] = user.id
-      redirect "/items"
-    else
-      flash[:message] = "Please enter a valid username, email, and password to create an account."
+    if User.find_by(username: params[:username])
+      flash[:message] = "This username is taken. Please enter a new username."
+      puts flash[:message]
       redirect "/signup"
+    else
+      user = User.new(username: params[:username], email: params[:email], password: params[:password])
+      if user.save
+        session[:user_id] = user.id
+        redirect "/items"
+      else
+        flash[:message] = "Please enter a valid username, email, and password to create an account."
+        redirect "/signup"
+      end
     end
   end
 

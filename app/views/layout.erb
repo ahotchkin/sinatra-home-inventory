@@ -5,6 +5,12 @@
   </head>
   <body>
 
+    <h3 style="color: #16A085;">
+      <% if flash.has?(:message) %>
+        <%= flash[:message] %>
+      <% end %>
+    </h3>
+    
     <%= yield %>
 
   </body>
