@@ -1,0 +1,9 @@
+<h1><%= @group.name %></h1>
+
+<h3>Below are the items you have stored in <%= @group.name %>:</h3>
+
+<ul>
+  <% @group.items.each do |item| %>
+    <li><a href="/items/<%= item.slug %>"><%= item.name %></li>
+  <% end %>
+</ul>

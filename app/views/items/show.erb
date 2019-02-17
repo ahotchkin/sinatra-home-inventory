@@ -5,10 +5,10 @@ Cost: $<%= @item.cost %>
 Date Purchased: <%= @item.date_purchased %>
 <br><br>
 Stored in:
-  <% if !@item.categories.empty? %>
+  <% if !@item.groups.empty? %>
   <ul>
-    <% @item.categories.each do |category| %>
-      <li><%= category.name %></li>
+    <% @item.groups.each do |group| %>
+      <li><%= group.name %></li>
     <% end %>
   <% else %>
     <%= @item.name %> is not assigned to any categories.

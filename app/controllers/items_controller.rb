@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
 
   get '/items/new' do
     if logged_in?
-      @categories =  Category.all.sort { |a, b| a.name <=> b.name }
+      @groups =  Group.all.sort { |a, b| a.name <=> b.name }
       erb :'/items/new'
     else
       redirect "/login"
@@ -18,9 +18,9 @@ class ItemsController < ApplicationController
     if logged_in? && !params[:item_name].empty? && !params[:cost].empty?
       item = Item.new(name: params[:item_name], cost: params[:cost], date_purchased: params[:date_purchased])
       item.user_id = current_user.id
-      item.category_ids = params[:item][:category_ids]
-      if !params[:category_name].empty?
-        item.categories << Category.create(name: params[:category_name])
+      item.group_ids = params[:item][:group_ids]
+      if !params[:group_name].empty?
+        item.groups << Group.create(name: params[:group_name])
       end
       item.save
       flash[:message] = "Item successfully added."
@@ -45,7 +45,7 @@ class ItemsController < ApplicationController
   get '/items/:slug/edit' do
     if logged_in?
       @item = Item.find_by_slug(params[:slug])
-      @categories =  Category.all.sort { |a, b| a.name <=> b.name }
+      @groups =  Group.all.sort { |a, b| a.name <=> b.name }
       erb :'/items/edit'
     else
       redirect "/login"
@@ -56,9 +56,9 @@ class ItemsController < ApplicationController
     item = Item.find_by_slug(params[:slug])
     if !params[:item_name].empty? && !params[:cost].empty?
       item.update(name: params[:item_name], cost: params[:cost], date_purchased: params[:date_purchased])
-      item.category_ids = params[:item][:category_ids]
-      if !params[:category_name].empty?
-        item.categories << Category.create(name: params[:category_name])
+      item.group_ids = params[:item][:group_ids]
+      if !params[:group_name].empty?
+        item.groups << Group.create(name: params[:group_name])
       end
       item.save
       flash[:message] = "Item successfully updated."

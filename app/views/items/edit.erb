@@ -14,15 +14,15 @@
   <label>Select an existing category:</label>
   <br>
 
-  <% @categories.each do |category| %>
-    <input type="checkbox" id="<%= category.name %>" name="item[category_ids][]" value="<%= category.id %>" <%= 'checked' if @item.categories.include?(category) %>><%= category.name %></input>
+  <% @groups.each do |group| %>
+    <input type="checkbox" id="<%= group.name %>" name="item[group_ids][]" value="<%= group.id %>" <%= 'checked' if @item.groups.include?(group) %>><%= group.name %></input>
     <br>
   <% end %>
 
   <br>
 
-  <label for="category_name">And/or create a new category:</label>
-  <input type="text" id="category_name" name="category_name">
+  <label for="group_name">And/or create a new category:</label>
+  <input type="text" id="group_name" name="group_name">
   <br><br>
   <button type="submit" value="update_item">Update Item</button>
 </form>

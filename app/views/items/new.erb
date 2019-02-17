@@ -1,4 +1,4 @@
-<h1>Add an item to your home inventory</h1>
+group<h1>Add an item to your home inventory</h1>
 
 <form action="/items" method="POST">
   <label for="item_name">Item:</label>
@@ -13,15 +13,15 @@
   <label>Select an existing category:</label>
   <br>
 
-  <% @categories.each do |category| %>
-    <input type="checkbox" id="<%= category.name %>" name="item[category_ids][]" value="<%= category.id %>"><%= category.name %></input>
+  <% @groups.each do |group| %>
+    <input type="checkbox" id="<%= group.name %>" name="item[group_ids][]" value="<%= group.id %>"><%= group.name %></input>
     <br>
   <% end %>
 
   <br>
 
-  <label for="category_name">And/or create a new category:</label>
-  <input type="text" id="category_name" name="category_name">
+  <label for="group_name">And/or create a new category:</label>
+  <input type="text" id="group_name" name="group_name">
   <br><br>
   <button type="submit" value="add_item">Add Item</button>
 </form>

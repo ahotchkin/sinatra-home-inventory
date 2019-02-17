@@ -1,9 +1,0 @@
-<h1><%= @category.name %></h1>
-
-<h3>Below are the items you have stored in <%= @category.name %>:</h3>
-
-<ul>
-  <% @category.items.each do |item| %>
-    <li><a href="/items/<%= item.slug %>"><%= item.name %></li>
-  <% end %>
-</ul>

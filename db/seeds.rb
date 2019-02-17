@@ -1,9 +1,9 @@
 # Add seed data here. Seed your database with `rake db:seed`
 
-Category.create(name: "Kitchen")
-Category.create(name: "Living Room")
-Category.create(name: "Bedroom")
-Category.create(name: "Office")
-Category.create(name: "Electronics")
-Category.create(name: "Media")
-Category.create(name: "Appliances")
+Group.create(name: "Kitchen")
+Group.create(name: "Living Room")
+Group.create(name: "Bedroom")
+Group.create(name: "Office")
+Group.create(name: "Electronics")
+Group.create(name: "Media")
+Group.create(name: "Appliances")
