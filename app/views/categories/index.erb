@@ -1,1 +1,7 @@
 <h3>Below are all of your home inventory categories:</h3>
+
+<ul>
+  <% @categories.each do |category| %>
+    <li><%= category.name %></li>
+  <% end %>
+</ul>
