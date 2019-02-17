@@ -40,6 +40,7 @@ class UsersController < ApplicationController
       redirect "/items"
     else
       flash[:message] = "Incorrect username or password entered."
+      # puts flash[:message]
       redirect "/login"
     end
   end

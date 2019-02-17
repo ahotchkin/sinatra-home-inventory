@@ -8,7 +8,7 @@ Stored in:
   <% if !@item.groups.empty? %>
   <ul>
     <% @item.groups.each do |group| %>
-      <li><%= group.name %></li>
+      <li><a href="/groups/<%= group.slug %>"><%= group.name %></a></li>
     <% end %>
   <% else %>
     <%= @item.name %> is not assigned to any categories.
@@ -28,5 +28,5 @@ Stored in:
 <br><br><br>
 
 <footer>
-  <a href="/items">Home</a> | <a href="/logout">Log Out</a>
+  <a href="/items">Home</a> | <a href="/groups">Categories</a> | <a href="/logout">Log Out</a>
 </footer>

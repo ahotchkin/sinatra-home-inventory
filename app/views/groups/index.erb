@@ -2,6 +2,12 @@
 
 <ul>
   <% @groups.each do |group| %>
-    <li><%= group.name %></li>
+    <li><a href="/groups/<%= group.slug %>"><%= group.name %></a></li>
   <% end %>
 </ul>
+
+<br><br><br>
+
+<footer>
+  <a href="/items">Home</a> | <a href="/logout">Log Out</a>
+</footer>
