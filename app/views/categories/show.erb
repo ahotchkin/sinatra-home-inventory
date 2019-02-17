@@ -4,6 +4,6 @@
 
 <ul>
   <% @category.items.each do |item| %>
-    <li><%= item.name %></li>
+    <li><a href="/items/<%= item.slug %>"><%= item.name %></li>
   <% end %>
 </ul>
