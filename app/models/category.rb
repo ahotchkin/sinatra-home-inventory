@@ -1,4 +1,4 @@
-class Category <ActiveRecord::Base
+class Category < ActiveRecord::Base
   validates_presence_of :name
   has_many :item_categories
   has_many :items, through: :item_categories

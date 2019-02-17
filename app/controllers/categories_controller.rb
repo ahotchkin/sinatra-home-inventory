@@ -5,4 +5,13 @@ class CategoriesController < ApplicationController
     erb :'/categories/index'
   end
 
+  get '/categories/:id' do
+    if logged_in?
+      @category = Category.find(params[:id])
+      erb :'/categories/show'
+    else
+      redirect "/login"
+    end
+  end
+
 end
