@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
 
   get '/items/new' do
     if logged_in?
-      @categories =  Category.all.sort { |a, b| a.name <=> b.name }
+      @categories =  current_user.categories.uniq.sort { |a, b| a.name <=> b.name }
       erb :'/items/new'
     else
       redirect "/login"
