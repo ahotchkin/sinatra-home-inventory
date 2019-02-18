@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
 
   get '/items/new' do
     if logged_in?
-      @groups =  Group.all.sort { |a, b| a.name <=> b.name }
+      @groups = current_user.groups.sort { |a, b| a.name <=> b.name }
       erb :'/items/new'
     else
       redirect "/login"

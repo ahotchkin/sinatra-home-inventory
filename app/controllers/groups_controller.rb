@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
 
   get '/groups' do
-    @groups = Group.all.sort { |a, b| a.name <=> b.name }
+    @groups = current_user.groups.sort { |a, b| a.name <=> b.name }
     erb :'/groups/index'
   end
 
