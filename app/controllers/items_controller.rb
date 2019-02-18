@@ -1,13 +1,26 @@
 class ItemsController < ApplicationController
 
   get '/items' do
-    @items = current_user.items.sort { |a, b| a.name <=> b.name }
-    erb :'/items/index'
+    if logged_in?
+      @items = current_user.items.sort { |a, b| a.name <=> b.name }
+      erb :'/items/index'
+    else
+      redirect "/login"
+    end
   end
 
   get '/items/new' do
     if logged_in?
-      @groups = current_user.groups.sort { |a, b| a.name <=> b.name }
+      groups = []
+      Group.all.each do |group|
+        if group.user_ids.empty?
+          groups << group
+        end
+      end
+
+      user_groups = groups + current_user.groups
+      @user_groups_sorted = user_groups.uniq.sort { |a, b| a.name <=> b.name }
+
       erb :'/items/new'
     else
       redirect "/login"
@@ -18,9 +31,7 @@ class ItemsController < ApplicationController
     if logged_in? && !params[:item_name].empty? && !params[:cost].empty?
       item = Item.new(name: params[:item_name], cost: params[:cost], date_purchased: params[:date_purchased])
       item.user_id = current_user.id
-      if params[:group_ids]
-        item.group_ids = params[:item][:group_ids]
-      end
+      item.group_ids ||= params[:item][:group_ids]
       if !params[:group_name].empty?
         item.groups << Group.create(name: params[:group_name])
       end
@@ -47,7 +58,7 @@ class ItemsController < ApplicationController
   get '/items/:slug/edit' do
     if logged_in?
       @item = Item.find_by_slug(params[:slug])
-      @groups =  Group.all.sort { |a, b| a.name <=> b.name }
+      @groups =  current_user.groups.uniq.sort { |a, b| a.name <=> b.name }
       erb :'/items/edit'
     else
       redirect "/login"
