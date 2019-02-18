@@ -18,7 +18,9 @@ class ItemsController < ApplicationController
     if logged_in? && !params[:item_name].empty? && !params[:cost].empty?
       item = Item.new(name: params[:item_name], cost: params[:cost], date_purchased: params[:date_purchased])
       item.user_id = current_user.id
-      item.group_ids = params[:item][:group_ids]
+      if params[:group_ids]
+        item.group_ids = params[:item][:group_ids]
+      end
       if !params[:group_name].empty?
         item.groups << Group.create(name: params[:group_name])
       end
