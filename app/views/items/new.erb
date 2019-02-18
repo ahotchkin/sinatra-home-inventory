@@ -11,20 +11,23 @@
   <input type="text" id="date_purchased" name="date_purchased">
   <br><br>
 
-
-  <label>Select an existing category:</label>
-  <br>
-
-  <% @user_groups_sorted.each do |group| %>
-    <input type="checkbox" id="<%= group.name %>" name="item[group_ids][]" value="<%= group.id %>"><%= group.name %></input>
+  <% if !@groups.empty? %>
+    <label>Select an existing category:</label>
     <br>
+
+    <% @groups.each do |group| %>
+      <input type="checkbox" id="<%= group.name %>" name="item[group_ids][]" value="<%= group.id %>"><%= group.name %></input>
+      <br>
+    <% end %>
+
+    <br>
+
+    <label for="group_name">And/or create a new category:</label>
+    <input type="text" id="group_name" name="group_name">
+  <% else %>
+    <label for="group_name">Create a new category for this item:</label>
+    <input type="text" id="group_name" name="group_name">
   <% end %>
-
-  <br>
-
-  <label for="group_name">And/or create a new category:</label>
-  <input type="text" id="group_name" name="group_name">
-
   <br><br>
   <button type="submit" value="add_item">Add Item</button>
 </form>
