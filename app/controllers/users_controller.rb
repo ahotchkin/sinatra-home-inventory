@@ -11,7 +11,6 @@ class UsersController < ApplicationController
   post '/signup' do
     if User.find_by(username: params[:username])
       flash[:message] = "This username is taken. Please enter a new username."
-      # puts flash[:message]
       redirect "/signup"
     else
       user = User.new(username: params[:username], email: params[:email], password: params[:password])
@@ -39,8 +38,6 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect "/items"
     else
-      flash[:message] = "Incorrect username or password entered."
-      # puts flash[:message]
       redirect "/login"
     end
   end
