@@ -16,6 +16,7 @@
     <br>
 
     <% @groups.each do |group| %>
+      <input type="hidden" id="hidden" name="item[group_ids][]" value="">
       <input type="checkbox" id="<%= group.name %>" name="item[group_ids][]" value="<%= group.id %>"><%= group.name %></input>
       <br>
     <% end %>
