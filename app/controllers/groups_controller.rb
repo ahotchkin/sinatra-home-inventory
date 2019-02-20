@@ -1,8 +1,12 @@
 class GroupsController < ApplicationController
 
   get '/groups' do
-    @groups = current_user.groups.uniq.sort { |a, b| a.name <=> b.name }
-    erb :'/groups/index'
+    if logged_in?
+      @groups = current_user.groups.uniq.sort { |a, b| a.name <=> b.name }
+      erb :'/groups/index'
+    else
+      redirect "/login"
+    end
   end
 
   get '/groups/:slug' do

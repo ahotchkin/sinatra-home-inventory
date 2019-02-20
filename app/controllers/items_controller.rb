@@ -20,15 +20,19 @@ class ItemsController < ApplicationController
 
   post '/items' do
     if logged_in? && !params[:item_name].empty? && !params[:cost].empty?
-      groups = current_user.groups
       item = Item.new(name: params[:item_name], cost: params[:cost], date_purchased: params[:date_purchased])
       item.user_id = current_user.id
+
+      ### Code below is required to allow a user to create an item without selecting an existing category
+      groups = current_user.groups
       if !groups.empty?
         item.group_ids = params[:item][:group_ids]
       end
+
       if !params[:group_name].empty?
         item.groups << Group.create(name: params[:group_name])
       end
+      
       item.save
       flash[:message] = "Item successfully added."
       redirect "/items"
