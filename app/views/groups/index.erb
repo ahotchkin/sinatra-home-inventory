@@ -1,12 +1,16 @@
 <h1>Categories</h1>
 
-<h3>Below are all of your home inventory categories:</h3>
+<% if !@groups.empty? %>
+  <h3>Below are all of your home inventory categories:</h3>
 
-<ul>
-  <% @groups.each do |group| %>
-    <li><a href="/groups/<%= group.slug %>"><%= group.name %></a> (<%= group.items.length %>)</li>
-  <% end %>
-</ul>
+  <ul>
+    <% @groups.each do |group| %>
+      <li><a href="/groups/<%= group.slug %>"><%= group.name %></a> (<%= group.items.length %>)</li>
+    <% end %>
+  </ul>
+<% else %>
+  <h3>You don't have any categories saved.</h3>
+<% end %>
 
 <br><br><br>
 
