@@ -32,7 +32,7 @@ class ItemsController < ApplicationController
       if !params[:group_name].empty?
         item.groups << Group.create(name: params[:group_name])
       end
-      
+
       item.save
       flash[:message] = "Item successfully added."
       redirect "/items"
@@ -68,9 +68,11 @@ class ItemsController < ApplicationController
     if !params[:item_name].empty? && !params[:cost].empty?
       item.update(name: params[:item_name], cost: params[:cost], date_purchased: params[:date_purchased])
       item.group_ids = params[:item][:group_ids]
+
       if !params[:group_name].empty?
         item.groups << Group.create(name: params[:group_name])
       end
+
       item.save
       flash[:message] = "Item successfully updated."
       redirect "/items/#{item.slug}"

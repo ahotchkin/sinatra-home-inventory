@@ -10,20 +10,31 @@
   <br><br>
   <label for="date_purchased">Date Purchased (YYYY-MM-DD):</label>
   <input type="text" id="date_purchased" name="date_purchased" value="<%= @item.date_purchased %>">
-  <br><br>
-  <label>Select an existing category:</label>
-  <br>
 
-  <% @groups.each do |group| %>
-    <input type="checkbox" id="<%= group.name %>" name="item[group_ids][]" value="<%= group.id %>" <%= 'checked' if @item.groups.include?(group) %>><%= group.name %></input>
+  <br><br>
+
+  <% if !@groups.empty? %>
+    <label>Select an existing category:</label>
+
     <br>
+
+    <% @groups.each do |group| %>
+      <input type="hidden" id="hidden" name="item[group_ids][]" value="">
+      <input type="checkbox" id="<%= group.name %>" name="item[group_ids][]" value="<%= group.id %>" <%= 'checked' if @item.groups.include?(group) %>><%= group.name %></input>
+      <br>
+    <% end %>
+
+    <br>
+
+    <label for="group_name">And/or create a new category:</label>
+    <input type="text" id="group_name" name="group_name">
+  <% else %>
+    <label for="group_name">Create a new category for this item:</label>
+    <input type="text" id="group_name" name="group_name">
   <% end %>
 
-  <br>
-
-  <label for="group_name">And/or create a new category:</label>
-  <input type="text" id="group_name" name="group_name">
   <br><br>
+
   <button type="submit" value="update_item">Update Item</button>
 </form>
 
