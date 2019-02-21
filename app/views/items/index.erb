@@ -1,12 +1,16 @@
 <h1><%= current_user.username %>'s Home Inventory</h1>
 
-<h3>Below are all of the items you currently have in your home inventory:</h3>
+<% if !@items.empty? %>
+  <h3>Below are all of the items you currently have in your home inventory:</h3>
 
-<ul>
-  <% @items.each do |item| %>
-    <li><a href="/items/<%= item.slug %>"><%= item.name %></li>
-  <% end %>
-</ul>
+  <ul>
+    <% @items.each do |item| %>
+      <li><a href="/items/<%= item.slug %>"><%= item.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <h3>There are no items in your home inventory.</h3>
+<% end %>
 
 <br><br>
 
