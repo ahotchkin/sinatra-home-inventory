@@ -82,7 +82,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  delete '/items/:slug/delete' do
+  delete '/items/:slug' do
     @item = Item.find_by_slug(params[:slug])
     if logged_in? && @item.user_id == current_user.id
       @item.delete

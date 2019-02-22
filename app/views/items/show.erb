@@ -20,9 +20,9 @@ Stored in:
 
 <br><br>
 
-<form action="/items/<%= @item.slug %>/delete" method ="POST">
+<form action="/items/<%= @item.slug %>" method ="POST">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <button type="submit" value="delete">Delete Item</button>
+  <button type="submit" value="delete_item">Delete Item</button>
 </form>
 
 <br><br><br>
