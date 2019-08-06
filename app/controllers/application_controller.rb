@@ -27,6 +27,14 @@ class ApplicationController < Sinatra::Base
       end
     end
 
+    def current_item
+      Item.find_by_slug(params[:slug])
+    end
+
+    def current_users_groups
+      current_user.groups.uniq.sort { |a, b| a.name <=> b.name }
+    end
+
   end
 
 end

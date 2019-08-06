@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
 
   get '/items/new' do
     redirect_unless_logged_in
-    @groups = current_user.groups.uniq.sort { |a, b| a.name <=> b.name }
+    @groups = current_users_groups
     erb :'/items/new'
   end
 
@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
 
   get '/items/:slug' do
     redirect_unless_logged_in
-    @item = Item.find_by_slug(params[:slug])
+    @item = current_item
     if @item.user == current_user
       erb :'/items/show'
     else
@@ -49,8 +49,8 @@ class ItemsController < ApplicationController
 
   get '/items/:slug/edit' do
     redirect_unless_logged_in
-    @item = Item.find_by_slug(params[:slug])
-    @groups = current_user.groups.uniq.sort { |a, b| a.name <=> b.name }
+    @item = current_item
+    @groups = current_users_groups
     if @item.user == current_user
       erb :'/items/edit'
     else
@@ -59,7 +59,7 @@ class ItemsController < ApplicationController
   end
 
   patch '/items/:slug' do
-    item = Item.find_by_slug(params[:slug])
+    item = current_item
     if !params[:item_name].empty? && !params[:cost].empty?
       item.update(name: params[:item_name], cost: params[:cost], date_purchased: params[:date_purchased])
       item.group_ids = params[:item][:group_ids]
@@ -79,7 +79,7 @@ class ItemsController < ApplicationController
 
   delete '/items/:slug' do
     redirect_unless_logged_in
-    @item = Item.find_by_slug(params[:slug])
+    @item = current_item
     if @item.user_id == current_user.id
       @item.delete
       flash[:message] = "Item successfully deleted."

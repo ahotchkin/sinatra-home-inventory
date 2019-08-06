@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
 
   get '/groups' do
     redirect_unless_logged_in
-    @groups = current_user.groups.uniq.sort { |a, b| a.name <=> b.name }
+    @groups = current_users_groups
     erb :'/groups/index'
   end
 
