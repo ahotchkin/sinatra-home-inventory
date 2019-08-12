@@ -1,16 +1,25 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8">
     <title>Home Inventory</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/application.css">
   </head>
   <body>
+    <div class="navbar">
+      <% if logged_in? %>
+        <a href="/items" class="navbar-link">Home</a>
+        <a href="/groups" class="navbar-link">Categories</a>
+        <a href="/logout" class="navbar-link">Log Out</a>
+      <% end %>
+    </div>
 
-    <h3 style="color: #16A085;">
+    <h3 class="message">
       <% if flash.has?(:message) %>
         <%= flash[:message] %>
       <% end %>
     </h3>
-    
+
     <%= yield %>
 
   </body>

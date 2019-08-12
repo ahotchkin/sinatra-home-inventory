@@ -16,17 +16,11 @@ Stored in:
   </ul>
 <br><br>
 
-<a href="/items/<%= @item.slug %>/edit">Edit Item</a>
+<a href="/items/<%= @item.slug %>/edit" class="button btn-primary">Edit Item</a>
 
 <br><br>
 
 <form action="/items/<%= @item.slug %>" method ="POST">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <button type="submit" value="delete_item">Delete Item</button>
+  <button type="submit" value="delete_item" class="button btn-primary">Delete Item</button>
 </form>
-
-<br><br><br>
-
-<footer>
-  <a href="/items">Home</a> | <a href="/groups">Categories</a> | <a href="/logout">Log Out</a>
-</footer>
