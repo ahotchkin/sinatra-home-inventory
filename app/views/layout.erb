@@ -6,21 +6,27 @@
     <link rel="stylesheet" type="text/css" href="/stylesheets/application.css">
   </head>
   <body>
-    <div class="navbar">
+    <div class="topnav">
       <% if logged_in? %>
-        <a href="/items" class="navbar-link">Home</a>
-        <a href="/groups" class="navbar-link">Categories</a>
-        <a href="/logout" class="navbar-link">Log Out</a>
+        <a href="/items" class="topnav a">Home</a>
+        <a href="/groups" class="topnav a">Categories</a>
+        <a href="/logout" class="topnav a">Log Out</a>
+      <% else %>
+        <a href="/" class="topnav a">Home</a>
+        <a href="/signup" class="topnav a">Sign up</a>
+        <a href="/login" class="topnav a">Log in</a>
       <% end %>
     </div>
 
-    <h3 class="message">
-      <% if flash.has?(:message) %>
-        <%= flash[:message] %>
-      <% end %>
-    </h3>
+    <div class="container">
+      <h3 class="message">
+        <% if flash.has?(:message) %>
+          <%= flash[:message] %>
+        <% end %>
+      </h3>
 
-    <%= yield %>
+      <%= yield %>
+    </div>
 
   </body>
 </html>
