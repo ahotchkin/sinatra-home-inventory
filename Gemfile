@@ -13,6 +13,7 @@ gem 'bcrypt'
 gem 'tux'
 gem 'rack-flash3', :require => 'rack-flash'
 gem 'nokogiri', '>= 1.10.4'
+gem 'rack', '>= 2.0.8'
 
 group :test do
   gem 'rspec'
