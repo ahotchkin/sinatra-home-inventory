@@ -14,6 +14,7 @@ gem 'tux'
 gem 'rack-flash3', :require => 'rack-flash'
 gem 'nokogiri', '>= 1.10.8'
 gem 'rack', '>= 2.0.8'
+gem 'activesupport', '>= 5.2.4.3'
 
 group :test do
   gem 'rspec'
